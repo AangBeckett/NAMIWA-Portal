@@ -1,0 +1,141 @@
+<include href="views/forms/includes/header.html"/>
+<div class="container p-3">
+    <h6 class="">
+        <a href="/unami" class="text-decoration-none mt-0 pt-0 text-primary">
+            <i class="fas fa-arrow-left fa-sm"></i> Back
+        </a>
+    </h6>
+    <div class="card shadow-sm bg-white rounded">
+        <div class="card-header">
+            <h4 class="pt-2"><i class="fas fa-users mr-1 text-primary"></i> In Our Own Voice Facilitator Training Application</h4>
+        </div>
+        <div class="card-body m-3">
+
+            <!-- header info -->
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <h5 class="mb-2"><i class="fas fa-map-marker-alt mr-1 text-primary"></i><strong> Training Location:</strong>  {{ @SESSION.training_info['location'] }}</h5>
+                    <h5><i class="fas fa-reply fa-rotate-180 text-primary"></i><strong> Application Deadline:</strong>  {{ date('F j, Y', strtotime(@SESSION.training_info['deadline'])) }}</h5>
+
+                    <hr>
+
+                    <h5><i class="far fa-calendar-alt mr-2 text-primary"></i><strong>Training Schedule:</strong></h5>
+                    <h5>{{ date('F j, Y', strtotime(@SESSION.training_info['date'])) }}</h5>
+                </div>
+                <div class="col-md-6 py-3">
+                    <h5><i class="fas fa-info-circle mr-1 text-primary"></i><strong>NAMI In Our Own Voice is:</strong></h5>
+                    <h5>A unique public education presentation that offers insight into the hope and recovery
+                        possible for people living with mental illness. Trained individuals living with mental illness lead a brief, yet
+                        comprehensive and interactive, presentation about mental illness.
+                    </h5>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <h4 class="text-center font-weight-bold pt-4 pb-2"><i class="fas fa-question-circle text-primary"></i> About This Training</h4>
+
+            <!-- what will you learn -->
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#whatlearn" role="button" aria-expanded="false" >
+                    What will you learn at the In Our Own Voice (IOOV) program? <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="whatlearn">
+                    <div class="card card-body p-4">
+                        <h5>
+                            The IOOV online training is focused on preparing your draft presentation script, and the one-day in-person training will
+                            focus on skill development. The online portion could take 6-8 hours to complete. Each trainee will learn to do the
+                            following: prepare your story, develop your story, and practice your talk for use at In Our Own Voice presentations in
+                            your community. Two presenters speak at each engagement, at community organizations, health centers, schools,
+                            churches, etc.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- what -->
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#what" role="button" aria-expanded="false">
+                    What are In Our Own Voice presentations like? <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="what">
+                    <div class="card card-body p-4">
+                        <h5>
+                            A 15-minute NAMI DVD is used to introduce the four sections of your speech: Introduction, What Happened, What
+                            Helps, What’s Next. This program has been a major stigma-buster, helping to educate the general public about mental
+                            illness, recovery, and NAMI’s mission of education, support, and advocacy.
+                            To make this program successful, we strongly recommend that your affiliate have an In Our Own Voice coordinator. This
+                            person will help arrange the different speaking engagements. Travel expenses for presenters are covered by the affiliate.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Criteria -->
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#criteria" role="button" aria-expanded="false">
+                    Criteria for taking the IOOV Presenter Training <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="criteria">
+                    <div class="card card-body p-4">
+                        <h5>Presenters must be:</h5>
+                        <ul>
+                            <li> A PEER: a Person of Experience, Engaged in Recovery</li>
+                            <li> A current member of a NAMI Affiliate</li>
+                            <li> Willing to complete the online training no later than 2 weeks before the in-person training.</li>
+                            <li>  Willing to stay for the entire 1-day intensive training</li>
+                            <li> Willing to be available for presentations for a two (2) year period following their training</li>
+                            <li> Must be at least 18 years of age</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- registration -->
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#registration" role="button" aria-expanded="false">
+                    Registration Information <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="registration">
+                    <div class="card card-body p-4">
+                        <h5>
+                            NAMI Washington will pay for meals, snacks, lodging and all training materials. Your NAMI
+                            affiliate is asked to cover your travel and other expenses that you may incur to attend
+                            this training. Lodging will be at a nearby hotel,and is <b>double occupancy.</b> If you
+                            require single occupancy, arrangements will need to be made prior to attendance by the
+                            attendee and there will be additional costs <b>which will be the responsibility of the
+                            attendee.</b>
+                        </h5>
+                        <hr>
+                        <h5>
+                            Attending the training is by <b>pre-registration only,</b> and class size is
+                            limited. If there are more applications than spots for the class, a waiting list will be
+                            created. In order to reserve a space, a $50 refundable registration deposit <b>from your
+                            affiliate</b> is required at the time of registration.
+                        </h5>
+                            <hr>
+                        <h5>
+                            If you need to cancel after being
+                            accepted,  notify the NAMI Washington staff, no later than a week before the training so
+                            we can fill your spot, or your affiliate will lose its $50 registration deposit.
+                            Cancelled spots are filled with applications from the waiting list for the class, not by
+                            sending another affiliate member.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- start -->
+            <div class="text-center my-4 mt-5 pt-2">
+                <h3 class="font-weight-bold mb-3">Ready to start the application?</h3>
+                <a class="btn btn-primary btn-lg text-uppercase px-5" href="personal_information" role="button">Start</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<include href="views/forms/includes/footer.html"/>
