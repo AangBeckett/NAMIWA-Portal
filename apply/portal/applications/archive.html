@@ -1,0 +1,150 @@
+<include href="views/portal/includes/header.html"/>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h2 mb-5 text-primary"><i class="fas fa-archive"></i> Archived Applications </h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h5 class="m-0 text-gray-800">Showing All <strong>{{ @numArchive['NumApplicants'] }}</strong> Archived Applications</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr class="bg-primary text-white">
+                        <th>Name</th>
+                        <th>Affiliate</th>
+                        <th>Training</th>
+                        <th>Email</th>
+                        <th>Date Submitted</th>
+                        <th>Edit</th>
+                        <th>View</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr class="bg-light">
+                        <th>Name</th>
+                        <th>Affiliate</th>
+                        <th>Training</th>
+                        <th>Email</th>
+                        <th>Date Submitted</th>
+                        <th>Edit</th>
+                        <th>View</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                        <!-- all waitlisteed applicants -->
+                        <repeat group="{{ @ArchivedApplicants }}" value="{{ @ArchivedApplicant }}">
+                            <tr>
+                                <!-- name, affiliate, training -->
+                                <td>{{ @ArchivedApplicant['Name'] }}</td>
+                                <td>{{ @ArchivedApplicant['Affiliate'] }}</td>
+                                <td>{{ @ArchivedApplicant['Training'] }} {{date('F Y', strtotime(@ArchivedApplicant['Date']))}}</td>
+
+                                <!-- mailto applicant email -->
+                                <td>
+                                    <a  class="text-decoration-none text-body"
+                                        href="mailto: {{ @ArchivedApplicant['Email'] }}">
+                                        {{ @ArchivedApplicant['Email'] }}
+                                    </a>
+                                </td>
+
+                                <!-- date submitted, order w raw date -->
+                                <td data-order="{{ @ArchivedApplicant['DateSubmitted'] }}">
+                                    {{ date('m/d/Y', strtotime(@ArchivedApplicant['DateSubmitted'])) }}
+                                </td>
+
+                                <!-- edit -> modal -- use ID here -->
+                                <td class="text-center">
+                                    <a href="#" class="text-decoration-none text-primary" data-toggle="modal" data-target="#modal{{ @ArchivedApplicant['ID'] }}">
+                                        <i class="fas fa-edit fa-lg"></i>
+                                    </a>
+                                </td>
+
+
+                                <!-- view -- use ID here -->
+                                <td class="text-center">
+                                    <a href="{{ @ArchivedApplicant['ID'] }}" class="text-decoration-none text-primary">
+                                        <i class="fas fa-external-link-square-alt fa-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <!-- edit modal -->
+                            <div class="modal fade" id="modal{{ @ArchivedApplicant['ID'] }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="modal{{ @ArchivedApplicant['ID'] }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header bg-primary">
+                                            <h4 class="modal-title text-white" id="modalLabel">
+                                                <i class="fas fa-edit"></i> Edit
+                                                <span class="font-weight-bold">{{ @ArchivedApplicant['Name'] }}'s</span>
+                                                Application
+                                            </h4>
+
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <!-- edit form -->
+                                        <form action="archive" method="post">
+                                            <div class="modal-body py-4">
+
+                                                <input type="hidden" value="{{ @ArchivedApplicant['ID'] }}" name="id">
+                                                <input type="hidden" value="{{ @ArchivedApplicant['AppStatus'] }}" name="status">
+
+                                                <h5><i class="fas fa-suitcase mr-1 text-primary"></i>Move Application</h5>
+                                                <div class="form-row mb-3">
+                                                    <div class="form-group col-md-6">
+                                                        <label class="sr-only" for="category">Location</label>
+                                                        <select id="category" class="form-control" name="category">
+                                                            <repeat group="{{ @applicationCategories }}" key="{{ @DBvalue }}" value="{{ @category }}">
+                                                                <option value="{{ @DBvalue }}"
+                                                                <check if="{{ @DBvalue == @ArchivedApplicant['Category'] }}">
+                                                                    selected
+                                                                </check>>
+                                                                {{ @category }}
+                                                                </option>
+                                                            </repeat>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <h5><i class="fas fa-pen-alt mr-1 text-primary"></i>Add Notes</h5>
+                                                <div class="form-row mb-2">
+                                                    <div class="form-group col-md-10">
+                                                        <label class="sr-only" for="notes">Notes</label>
+                                                        <textarea class="form-control" id="notes" rows="4" name="notes">{{ @ArchivedApplicant['Notes'] }}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" name="updateArchive" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- edit modal -->
+                        </repeat>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+<include href="views/portal/includes/footer.html"/>

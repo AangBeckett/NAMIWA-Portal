@@ -1,0 +1,188 @@
+<include href="views/forms/includes/header.html"/>
+<div class="container p-3">
+    <h6 class="">
+        <a href="/unami" class="text-decoration-none mt-0 pt-0 text-primary">
+            <i class="fas fa-arrow-left fa-sm"></i> Back
+        </a>
+    </h6>
+    <div class="card shadow-sm bg-white rounded">
+        <h4 class="card-header">Homefront Training Application</h4>
+        <div class="card-body m-3">
+
+            <!-- header info -->
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h5 class="mb-2"><i class="fas fa-map-marker-alt mr-1 text-primary"></i><strong> Training
+                        Location:</strong> {{ @SESSION.training_info['location'] }}</h5>
+                    <h5><i class="fas fa-reply fa-rotate-180 text-primary"></i><strong> Application Deadline:</strong>
+                        {{ date('F j, Y', strtotime(@SESSION.training_info['deadline'])) }}</h5>
+
+                    <hr>
+                    <h5><i class="far fa-calendar-alt mr-2 text-primary"></i><strong>Training Schedule:</strong></h5>
+                    <h5>{{ date('F j, Y', strtotime(@SESSION.training_info['date'])) }}</h5>
+                    <check if="@SESSION.training_info['date2']">
+                        <h5>{{ date('F j, Y', strtotime(@SESSION.training_info['date2'])) }}</h5>
+                    </check>
+                </div>
+                <div class="col-md-6">
+                    <h5><i class="fas fa-info-circle mr-1 text-primary"></i><strong>NAMI Homefront is:</strong></h5>
+                    <h5>For families, partners, and friends who provide care for Service Members or Veterans
+                        experiencing mental health symptoms</h5>
+                </div>
+
+
+            </div>
+
+
+            <hr class="my-4">
+
+            <h4 class="text-center font-weight-bold pt-4 pb-2"><i class="fas fa-question-circle text-primary"></i> About
+                This Training</h4>
+
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#hWhatIs" role="button"
+                                           aria-expanded="false" aria-controls="collapseExample">
+                    What is the NAMI Homefront program?<i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="hWhatIs">
+                    <div class="card card-body p-4">
+                        <h5>
+                            NAMI’s Homefront class is a 6-session educational program for families, caregivers and
+                            friends of military service members and vets with mental health conditions. Based on the
+                            nationally recognized NAMI Family-to-Family program, NAMI Homefront is designed to address
+                            the unique needs of family, caregivers and friends of those who have served or are currently
+                            serving our country.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#hwhatLearn" role="button"
+                                           aria-expanded="false" aria-controls="collapseExample">
+                    What will I learn from this training? <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="hwhatLearn">
+                    <div class="card card-body p-4">
+                        <h5 class="pt-2">
+                            Participants will learn the necessary skills to conduct a rigorous and effective 6-week
+                            course in your community. Topics covered in the training include critical information and
+                            strategies related to care giving, incorporating presentations, discussions, and exercises.
+                            This helps provide the necessary tools for a better understanding of the individual living
+                            with mental illness. This class uses a guided group process to help families gain practical
+                            insight, obtain important information about research and resiliency along with increasing
+                            their emotional learning skills.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#hTeacherReqs" role="button"
+                                           aria-expanded="false" aria-controls="collapseExample">
+                    Homefront Teacher Requirements <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="hTeacherReqs">
+                    <div class="card card-body p-4">
+                        <h5>
+                            To be a successful NAMI Homefront teacher, you need to respond to others in a non-judgmental
+                            way, you need to be a good listener with an empathetic ear, you need to be willing to talk
+                            about your experience as a family member of someone living with a mental illness, and you
+                            will need to be a family member of a service member/veteran living with mental illness.
+                        </h5>
+
+                        <h5>
+                            Trainees agree to attend the entire class. Trainees must demonstrate the qualifications
+                            needed to become a good NAMI teacher by the end of training. Trainees may be asked to
+                            improve their skills in particular key areas and repeat the training before they may become
+                            certified. All applicants will participate in a phone screening interview with the class
+                            leaders prior to being accepted into the class. Minimum age to become a Homefront teacher is
+                            18 years old.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#hAfterReqs" role="button"
+                                           aria-expanded="false" aria-controls="collapseExample">
+                    What is required of me after I take the training? <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="hwafterReqs">
+                    <div class="card card-body p-4">
+                        <h5>
+                            By taking this teacher training you are committed to co-teaching the Homefront class,
+                            consisting
+                            of 6 weeks of material, at least twice in a 24-month period in cooperation with your local
+                            NAMI
+                            affiliate.
+                        </h5>
+                        <h5>
+                            You will need to register and interview all prospective students before the class. Each
+                            weekly
+                            class requires a lot of pre-class preparation. In some affiliates, the teacher also needs to
+                            find a location for the classes and take care of advertising and publicity. You will be
+                            required
+                            to send periodic reports to State and National for their recordkeeping and upload data into
+                            the
+                            National NAMI Education Data tracking program. The classes involve reading aloud from NAMI
+                            course materials so applicants need to be comfortable with this.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- registration -->
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#hRegistration" role="button"
+                                           aria-expanded="false" aria-controls="collapseExample">
+                    Registration Information <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="hRegistration">
+                    <div class="card card-body p-4">
+                        <h5>
+                            NAMI Washington will cover the cost of all training materials, food, and lodging. Your NAMI
+                            affiliate is asked to cover your travel expenses. Lodging will be at a nearby hotel, and is
+                            double occupancy, which means you will be sharing a room with another attendee. If you require
+                            single occupancy, arrangements will need to be made prior to your attendance, and there
+                            will be additional costs which will be the responsibility of the attendee.
+                        </h5>
+                        <hr>
+                        <h5>
+                            Attending the training is by pre-registration only, and class size is limited. In order to
+                            reserve a space, your affiliate must submit a $50 refundable registration deposit at the
+                            time of registration. If there are more applications than spots for the training, a waiting
+                            list will be created.
+                        </h5>
+                        <hr>
+                        <h5>
+                            Completion of the online training is REQUIRED for in-person training attendance – if you do
+                            not complete the online training within three weeks of the application deadline, you will
+                            be unable to attend the in-person training.
+                        </h5>
+                        <hr>
+                        <h5>
+                            If you find that you are unable to attend the training after being accepted,  notify the
+                            NAMI Washington staff, no later than a week before the training so we can fill your spot,
+                            or your affiliate will lose its $50 registration deposit. Cancelled spots are filled with
+                            applications from the waiting list for the class, not by
+                            sending another affiliate member.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- start -->
+            <div class="text-center my-4 mt-5 pt-2">
+                <h3 class="font-weight-bold mb-3">Ready to start the application?</h3>
+                <a class="btn btn-primary btn-lg text-uppercase px-5" href="personal_information"
+                   role="button">Start</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<include href="views/forms/includes/footer.html"/>

@@ -1,0 +1,9 @@
+.button-container {
+    position: relative;
+}
+
+.align-to-textarea {
+    position: absolute;
+    bottom: 15px;
+    right: -25px;
+}

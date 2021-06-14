@@ -1,0 +1,398 @@
+<include href="views/forms/includes/header.html"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<div class="container p-3">
+    <h5>Progress</h5>
+    <div class="progress border" style="height: 20px">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+             style="width: 40%"
+             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%
+        </div>
+    </div>
+</div>
+
+<div class="container p-3 ">
+
+    <!-- Displays any errors with the input from the user -->
+    <check if="{{!empty(@errors)}}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <repeat group=" {{ @errors }}" key="{{ @key }}" value="{{ @error}}">
+                <h4><strong>Error:</strong> {{ @error }}</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </repeat>
+        </div>
+    </check>
+
+    <div class="card shadow-sm bg-white rounded">
+
+        <div class="card-header">
+            <h4 class="float-left pt-2"><i class="fas fa-question-circle text-primary mr-1"></i> Provider Education
+                Questions</h4>
+            <check if="{{ $_GET['fromReview'] == true }}">
+                <form method="get" action="review">
+                    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-redo-alt"></i> Back to
+                        Review
+                    </button>
+                </form>
+            </check>
+        </div>
+
+        <div class="card-body m-3">
+            <div>
+
+                <h6 class="mb-5 text-primary font-weight-bold">
+                    <i class="fas fa-star-of-life"></i> All fields are required
+                </h6>
+
+                <form method="post" action="long_answer">
+                    <div class="form-row">
+
+                        <!--Question 2-->
+                        <div class="form-group col-md-10">
+                            <h5>{{@peLongAnswers['q2']}}</h5>
+                            <div class="form-check form-check-inline ml-2">
+                                <input name="convict" class="form-check-input" type="radio" id="yesConvict" value="yes"
+                                       required
+                                <check if="{{ $_SESSION['LongAnswer']->getConvict() == 'yes' }}">
+                                    checked
+                                </check>
+                                >
+                                <label class="form-check-label" for="yesConvict">Yes</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input name="convict" class="form-check-input" type="radio" id="noConvict" value="no"
+                                       required
+                                <check if="{{ $_SESSION['LongAnswer']->getConvict() == 'no' }}">
+                                    checked
+                                </check>
+                                >
+                                <label class="form-check-label" for="noConvict">No</label>
+                            </div>
+                            <br>
+
+                            <div class="form-row mt-3 ml-2" id="convictText" style="display: none">
+                                <!--Question 2a-->
+                                <label>{{@peLongAnswers['q2a']}}
+                                    <br><textarea class="form-control" rows="4" cols="50" name="convictText" maxlength="1000"
+                                    >{{ $_SESSION['LongAnswer']->getConvictText() }}</textarea>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 5-->
+                        <div class="form-group col-md-10">
+                            <h5>{{@peLongAnswers['q5']}}</h5>
+                            <div class="form-check">
+                                <ul>
+                                    <li>
+                                        <input name="availability[]" class="form-check-input" type="checkbox"
+                                               value="Monday - Morning"
+                                               id="availability1">
+                                        <label class="form-check-label" for="availability1">Monday - Morning</label>
+                                    </li>
+                                    <li>
+                                        <input name="availability[]" class="form-check-input" type="checkbox"
+                                               value="Monday - Afternoon"
+                                               id="availableTime2">
+                                        <label class="form-check-label" for="availableTime2">Monday - Afternoon</label>
+                                    </li>
+                                    <li>
+                                        <input name="availability[]" class="form-check-input" type="checkbox"
+                                               value="Tuesday - Morning"
+                                               id="availability2">
+                                        <label class="form-check-label" for="availability2">Tuesday - Morning</label>
+                                    </li>
+                                    <li>
+                                        <input name="availability[]" class="form-check-input" type="checkbox"
+                                               value="Tuesday - Afternoon"
+                                               id="availableTime4">
+                                        <label class="form-check-label" for="availableTime4">Tuesday - Afternoon</label>
+                                    </li>
+                                    <li>
+                                        <input name="availability[]" class="form-check-input" type="checkbox"
+                                               value="Wednesday - Morning"
+                                               id="availability3">
+                                        <label class="form-check-label" for="availability3">Wednesday - Morning</label>
+                                    </li>
+                                    <li>
+                                        <input name="availability[]" class="form-check-input" type="checkbox"
+                                               value="Wednesday - Afternoon"
+                                               id="availableTime6">
+                                        <label class="form-check-label" for="availableTime6">Wednesday -
+                                            Afternoon</label>
+                                    </li>
+                                    <li>
+                                        <input name="availability[]" class="form-check-input" type="checkbox"
+                                               value="Thursday - Morning"
+                                               id="availability4">
+                                        <label class="form-check-label" for="availability4">Thursday - Morning</label>
+                                    </li>
+                                    <li>
+                                        <input name="availability[]" class="form-check-input" type="checkbox"
+                                               value="Thursday - Afternoon"
+                                               id="availableTime8">
+                                        <label class="form-check-label" for="availableTime8">Thursday -
+                                            Afternoon</label>
+                                    </li>
+                                    <li>
+                                        <input name="availability[]" class="form-check-input" type="checkbox"
+                                               value="Friday - Morning"
+                                               id="availability5">
+                                        <label class="form-check-label" for="availability5">Friday - Morning</label>
+                                    </li>
+                                    <li>
+                                        <input name="availability[]" class="form-check-input" type="checkbox"
+                                               value="Friday - Afternoon"
+                                               id="availableTime10">
+                                        <label class="form-check-label" for="availableTime10">Friday - Afternoon</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!--Question 6-->
+                        <div class="form-group col-md-10">
+                            <h5>{{@peLongAnswers['q6']}}</h5>
+                            <div class="form-group col-md-6 pt-3">
+                                <!--Question 6a-->
+                                <h5 class="mb-0"><label for="degree">{{@peLongAnswers['q6a']}}</label></h5>
+                                <input name="degree" type="text" class="form-control" id="degree"
+                                       required value="{{ $_SESSION['LongAnswer']->getDegree() }}"
+                                       placeholder="Last degree completed">
+                            </div>
+
+                            <!--Question 6b-->
+                            <div class="form-group col-md-10">
+                                <h5 class="mb-0"><label for="volunteerExperience">{{@peLongAnswers['q6b']}}</label></h5>
+                                <input name="volunteerExperience" type="text" class="form-control"
+                                       id="volunteerExperience"
+                                       required value="{{ $_SESSION['LongAnswer']->getVolunteerExperience() }}"
+                                       placeholder="Work/Volunteer Experience">
+                            </div>
+
+                            <!--Question 6c-->
+                            <div class="form-group col-md-10">
+                                <h5 class="mb-0"><label for="fluentLanguage">{{@peLongAnswers['q6c']}}</label></h5>
+                                <input name="fluentLanguage" type="text" class="form-control" id="fluentLanguage"
+                                       required value="{{ $_SESSION['LongAnswer']->getFluentLanguage() }}"
+                                       placeholder="English, Spanish, etc...">
+                            </div>
+
+                            <!--Question 6d-->
+                            <div class="form-group col-md-10">
+                                <p class="lead mb-2">{{@peLongAnswers['q6d']}}</p>
+                                <label>
+                                    <input class="mt-1 ml-1" type="radio" name="youngAdult" value="Age 18-30"
+                                           required
+                                    <check if="{{ $_SESSION['LongAnswer']->getYoungAdult() == 'Age 18-30'}}">
+                                        checked
+                                    </check>
+                                    > Age 18-30
+                                </label>
+                                <label>
+                                    <input class="ml-3" type="radio" name="youngAdult" value="Age 31-35"
+                                           required
+                                    <check if="{{ $_SESSION['LongAnswer']->getYoungAdult() == 'Age 31-35'}}">
+                                        checked
+                                    </check>
+                                    > Age 31-35
+                                </label>
+                                <label>
+                                    <input class="ml-3" type="radio" name="youngAdult" value="No"
+                                           required
+                                    <check if="{{ $_SESSION['LongAnswer']->getYoungAdult() == 'No'}}">
+                                        checked
+                                    </check>
+                                    > No
+                                </label>
+                            </div>
+
+                            <!--Question 6e-->
+                            <div class="form-group col-md-10">
+                                <p class="lead mb-2">{{@peLongAnswers['q6e']}}</p>
+                                <div class="form-check">
+                                    <input name="describes[]" class="form-check-input" type="checkbox"
+                                           value="Individual Living with Mental Illness"
+                                           id="describes1">
+                                    <label class="form-check-label" for="describes1">Individual Living with Mental
+                                        Illness </label>
+                                </div>
+                                <div class="form-check">
+                                    <input name="describes[]" class="form-check-input" type="checkbox"
+                                           value="Family Member"
+                                           id="describes2">
+                                    <label class="form-check-label" for="describes2">Family Member </label>
+                                </div>
+                                <div class="form-check">
+                                    <input name="describes[]" class="form-check-input" type="checkbox"
+                                           value="Mental Health Professional "
+                                           id="describes3">
+                                    <label class="form-check-label" for="describes3">Mental Health Professional </label>
+                                </div>
+                                <div class="form-check">
+                                    <input name="describes[]" class="form-check-input" type="checkbox"
+                                           value="Family to Family Teacher"
+                                           id="describes4">
+                                    <label class="form-check-label" for="describes4">Family to Family Teacher </label>
+                                </div>
+                                <div class="form-check">
+                                    <input name="describes[]" class="form-check-input" type="checkbox"
+                                           value="Basics Teacher"
+                                           id="describes5">
+                                    <label class="form-check-label" for="describes5">Basics Teacher </label>
+                                </div>
+                                <div class="form-check">
+                                    <input name="describes[]" class="form-check-input" type="checkbox"
+                                           value="HomeFront Teacher"
+                                           id="describes6">
+                                    <label class="form-check-label" for="describes6">HomeFront Teacher </label>
+                                </div>
+                                <div class="form-check">
+                                    <input name="describes[]" class="form-check-input" type="checkbox"
+                                           value="Peer-to-Peer Mentor"
+                                           id="describes7">
+                                    <label class="form-check-label" for="describes7">Peer-to-Peer Mentor </label>
+                                </div>
+                            </div>
+
+                            <!--Question 6f-->
+                            <div class="form-group col-md-10">
+                                <h5 class="mb-0"><label for="currentDiagnosis">{{@peLongAnswers['q6f']}}</label></h5>
+                                <textarea name="currentDiagnosis" class="form-control" id="currentDiagnosis" rows="3" maxlength="200"
+                                          cols="40"
+                                >{{ $_SESSION['LongAnswer']->getCurrentDiagnosis() }}</textarea>
+                            </div>
+
+                            <!--Question 6g-->
+                            <div class="form-group col-md-10">
+                                <h5 class="lead mb-2">{{@peLongAnswers['q6g']}}</h5>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input name="disclosure" class="form-check-input" type="radio" id="yesDisclosure"
+                                           value="yes"
+                                           required
+                                    <check if="{{ $_SESSION['LongAnswer']->getDisclosure() == 'yes' }}">
+                                        checked
+                                    </check>
+                                    >
+                                    <label class="form-check-label" for="yesDisclosure">Yes</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input name="disclosure" class="form-check-input" type="radio" id="noDisclosure"
+                                           value="no"
+                                           required
+                                    <check if="{{ $_SESSION['LongAnswer']->getDisclosure() == 'no' }}">
+                                        checked
+                                    </check>
+                                    >
+                                    <label class="form-check-label" for="noDisclosure">No</label>
+                                </div>
+                            </div>
+
+                            <!--Question 6h-->
+                            <div class="form-group col-md-10">
+                                <p class="lead mb-2">{{@peLongAnswers['q6h']}}</p>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input name="outlook" class="form-check-input" type="radio" id="yesOutlook"
+                                           value="yes"
+                                           required
+                                    <check if="{{ $_SESSION['LongAnswer']->getOutlook() == 'yes' }}">
+                                        checked
+                                    </check>
+                                    >
+                                    <label class="form-check-label" for="yesOutlook">Yes</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input name="outlook" class="form-check-input" type="radio" id="noOutlook"
+                                           value="no"
+                                           required
+                                    <check if="{{ $_SESSION['LongAnswer']->getOutlook() == 'no' }}">
+                                        checked
+                                    </check>
+                                    >
+                                    <label class="form-check-label" for="noOutlook">No</label>
+                                </div>
+                            </div>
+
+                            <!--Question 6i-->
+                            <div class="form-group col-md-10">
+                                <p class="lead mb-2">{{@peLongAnswers['q6i']}}</p>
+                                <div class="form-check form-check-inline ml-2">
+                                    <input name="background" class="form-check-input" type="radio" id="yesBackground"
+                                           value="yes"
+                                           required
+                                    <check if="{{ $_SESSION['LongAnswer']->getBackground() == 'yes' }}">
+                                        checked
+                                    </check>
+                                    >
+                                    <label class="form-check-label" for="yesBackground">Yes</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input name="background" class="form-check-input" type="radio" id="noBackground"
+                                           value="no"
+                                           required
+                                    <check if="{{ $_SESSION['LongAnswer']->getBackground() == 'no' }}">
+                                        checked
+                                    </check>
+                                    >
+                                    <label class="form-check-label" for="noBackground">No</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Question 7-->
+                        <div class="form-group col-md-10">
+                            <h5 class="mb-0"><label for="presenter">{{@peLongAnswers['q7']}}</label></h5>
+                            <textarea name="presenterText" class="form-control align-left" id="presenter" rows="3"
+                                      cols="40" maxlength="1000"
+                            >{{ $_SESSION['LongAnswer']->getPresenterText() }}</textarea>
+                        </div>
+                        <!--Question 8-->
+                        <div class="form-group col-md-10">
+                            <h5 class="mb-0"><label for="frontLineExperience">{{@peLongAnswers['q8']}}</label></h5>
+                            <textarea name="frontLineExperienceText" class="form-control" id="frontLineExperience"
+                                      rows="3" cols="40" maxlength="1000"
+                            >{{ $_SESSION['LongAnswer']->getFrontLineExperienceText() }}</textarea>
+                        </div>
+                        <!--Question 9-->
+                        <div class="form-group col-md-10">
+                            <h5 class="mb-0"><label for="supportiveExperience">{{@peLongAnswers['q9']}}</label></h5>
+                            <textarea name="supportiveExperienceText" class="form-control align-text-top"
+                                      id="supportiveExperience" rows="3" cols="40" maxlength="1000"
+                            >{{ $_SESSION['LongAnswer']->getSupportiveExperienceText() }}</textarea>
+                        </div>
+                        <!--Question 10-->
+                        <div class="form-group col-md-10">
+                            <h5 class="mb-0"><label for="recovery">{{@peLongAnswers['q10']}}</label></h5>
+                            <textarea name="recoveryText" class="form-control" rows="3" cols="40" id="recovery" maxlength="1000"
+                            >{{ $_SESSION['LongAnswer']->getRecoveryText() }}</textarea>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                </form>
+
+                <form action="additional_information" method="get">
+                    <button type="submit" name="goBack" value="goBack" class="btn btn-primary float-left">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="views/forms/js/long_answer_scripts/PELongAnswersScript.js"></script>
+
+<include href="views/forms/includes/footer.html"/>
