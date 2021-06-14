@@ -1,0 +1,45 @@
+{
+  "name": "unami/unami",
+  "authors": [
+    {
+      "name": "Max Lee",
+      "email": "mlee77@mail.greenriver.edu"
+    },
+    {
+      "name": "Trang",
+      "email": "tluu9@mail.greenriver.edu"
+    },
+    {
+      "name": "Jason",
+      "email": "jengelbrecht2@mail.greenriver.edu"
+    },
+    {
+      "name": "Alvin",
+      "email": "anava8@mail.greenriver.edu"
+    },
+    {
+      "name": "Olivia",
+      "email": "oringhiser@mail.greenriver.edu"
+    },
+    {
+      "name": "Maureen",
+      "email": "mkariuki2@mail.greenriver.edu"
+    },
+    {
+      "name": "Imelda",
+      "email": "imedina-castaneda@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master",
+    "swiftmailer/swiftmailer": "^6.0",
+    "phpoffice/phpspreadsheet": "1.8.2",
+    "spipu/html2pdf": "dev-master",
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "classmap": [
+      "classes/"
+    ]
+  }
+}
