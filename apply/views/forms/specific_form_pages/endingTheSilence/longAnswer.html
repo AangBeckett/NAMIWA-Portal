@@ -1,0 +1,279 @@
+<include href="views/forms/includes/header.html"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<div class="container p-3">
+    <h5>Progress</h5>
+    <div class="progress border" style="height: 20px">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+             style="width: 40%"
+             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%
+        </div>
+    </div>
+</div>
+
+<div class="container p-3 ">
+
+    <!-- Displays any errors with the input from the user -->
+    <check if="{{!empty(@errors)}}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <repeat group=" {{ @errors }}" key="{{ @key }}" value="{{ @error}}">
+                <h4><strong>Error:</strong> {{ @error }}</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </repeat>
+        </div>
+    </check>
+
+    <div class="card shadow-sm bg-white rounded">
+
+        <div class="card-header">
+            <h4 class="float-left pt-2"><i class="fas fa-question-circle text-primary mr-1"></i> Ending the Silence
+                Questions</h4>
+            <check if="{{ $_GET['fromReview'] == true }}">
+                <form method="get" action="review">
+                    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-redo-alt"></i> Back to
+                        Review
+                    </button>
+                </form>
+            </check>
+        </div>
+
+        <div class="card-body m-3">
+            <div>
+                <h6 class="mb-5 text-primary font-weight-bold">
+                    <i class="fas fa-star-of-life"></i> All fields are required
+                </h6>
+
+                <form method="post" action="long_answer">
+                    <div class="form-row">
+
+                        <!--Question 2-->
+                        <div class="form-group pt-2">
+                            <h5 class="mb-3 ml-1">{{@etsLongAnswers['q2']}}</h5>
+
+                            <div class="form-check form-check-inline ml-2">
+                                <input name="convict" class="form-check-input" type="radio" id="yesConvict" value="yes"
+                                       required
+                                <check
+                                        if="{{ $_SESSION['LongAnswer']->getConvict() == 'yes' }}">
+                                    checked
+                                </check>
+                                >
+                                <label class="form-check-label" for="yesConvict">Yes</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input name="convict" class="form-check-input" type="radio" id="noConvict" value="no"
+                                       required
+                                <check
+                                        if="{{ $_SESSION['LongAnswer']->getConvict() == 'no' }}">
+                                    checked
+                                </check>
+                                <label class="form-check-label" for="noConvict">No</label>
+                            </div>
+                            <br>
+
+                            <div class="form-row mt-3 ml-2" id="convictText" style="display: none">
+                                <!--Question 2a-->
+                                <label>{{@etsLongAnswers['q2a']}}
+                                    <br><textarea class="form-control" rows="4" cols="50" name="convictText" maxlength="1000"
+                                    >{{ $_SESSION['LongAnswer']->getConvictText() }}</textarea>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group pt-3">
+                            <!--Question 3-->
+                            <div class="form-row ml-1">
+                                <h5 class="mb-0"><label for="availability">{{@etsLongAnswers['q3']}}</label></h5>
+                                <input name="availability" type="text" class="form-control" id="availability" required
+                                       value="{{ $_SESSION['LongAnswer']->getAvailability() }}"
+                                       placeholder="Morning - Monday, Tuesday, etc.">
+                            </div>
+
+
+                            <!--Question 4-->
+                            <div class="form-row pt-5">
+                                <h5><strong>{{@etsLongAnswers['q4']}}</strong></h5>
+                                <div class="form-group col-md-6 pt-3">
+                                    <!--Question 4a-->
+                                    <h5 class="mb-0"><label for="education">Education</label></h5>
+                                    <input name="education" type="text" class="form-control" id="education"
+                                           required value="{{ $_SESSION['LongAnswer']->getEducation() }}"
+                                           placeholder="Last degree completed">
+                                </div>
+                            </div>
+                            <!--Question 4b-->
+                            <div class="form-row">
+                                <div class="form-group col-md-6 ml-1">
+                                    <h5 class="mb-0"><label for="experience">{{@etsLongAnswers['q4b']}}</label></h5>
+                                    <input name="experience" type="text" class="form-control" id="experience"
+                                           required value="{{ $_SESSION['LongAnswer']->getExperience() }}"
+                                           placeholder="Work/Volunteer Experience">
+                                </div>
+                            </div>
+
+                            <!--Question 4c-->
+                            <div class="form-row">
+                                <div class="form-group col-md-6 ml-1">
+                                    <h5 class="mb-0"><label for="languages">{{@etsLongAnswers['q4c']}}</label></h5>
+                                    <input name="languages" type="text" class="form-control" id="languages"
+                                           required value="{{ $_SESSION['LongAnswer']->getLanguages() }}"
+                                           placeholder="English, Spanish, etc...">
+                                </div>
+                            </div>
+
+                            <div class="form-row mb-4">
+                                <div class="form-group col-md-6 ml-1">
+                                    <!--Question 4d-->
+                                    <p class="lead mb-2">{{@etsLongAnswers['q4d']}}</p>
+                                    <label>
+                                        <input class="mt-1 ml-1" type="radio" name="ageRange" value="Age 18-30"
+                                               required
+                                        <check if="{{ $_SESSION['LongAnswer']->getYoungAdult() == 'Age 18-30'}}">
+                                            checked
+                                        </check>
+                                        > Age 18-30
+                                    </label>
+                                    <label>
+                                        <input class="ml-3" type="radio" name="ageRange" value="Age 31-35"
+                                               required
+                                        <check if="{{ $_SESSION['LongAnswer']->getYoungAdult() == 'Age 31-35'}}">
+                                            checked
+                                        </check>
+                                        > Age 31-35
+                                    </label>
+                                    <label>
+                                        <input class="ml-3" type="radio" name="ageRange" value="No"
+                                               required
+                                        <check if="{{ $_SESSION['LongAnswer']->getYoungAdult() == 'No'}}">
+                                            checked
+                                        </check>
+                                        > No
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!--Question 5-->
+                            <div class="row">
+                                <div class="col-md-7 ml-1">
+                                    <h5 class="mb-0"><label for="diagnosis">{{@etsLongAnswers['q5']}}</label></h5>
+                                    <textarea name="diagnosis" class="form-control" id="diagnosis"
+                                              rows="4"
+                                              cols="50" maxlength="200">{{ $_SESSION['LongAnswer']->getDiagnosis() }}</textarea>
+                                </div>
+                            </div>
+
+                            <!--Question 6-->
+                            <div class="form-row mb-4 ml-1">
+                                <div class="form-group col-md-6">
+                                    <p class="lead mb-2">{{@etsLongAnswers['q6']}}</p>
+                                    <label>
+                                        <input class="mt-1 ml-1" type="radio" name="selfDisclosure" value="yes" required
+                                        <check if="{{ $_SESSION['LongAnswer']->getSelfDisclosure() == 'yes'}}">
+                                            checked
+                                        </check>
+                                        > Yes</label>
+                                    <label><input class="ml-3" type="radio" name="selfDisclosure" value="no" required
+                                        <check if="{{ $_SESSION['LongAnswer']->getSelfDisclosure() == 'no'}}">
+                                            checked
+                                        </check>
+                                        > No</label>
+                                </div>
+                            </div>
+
+                            <!--Question 7-->
+                            <div class="form-row mb-4 ml-1">
+                                <div class="form-group col-md-8">
+                                    <p class="lead mb-2">{{@etsLongAnswers['q7']}}</p>
+                                    <label><input class="mt-1 ml-1" type="radio" name="outlook" value="yes" required
+                                        <check if="{{ $_SESSION['LongAnswer']->getPositiveOutlook() == 'yes'}}">
+                                            checked
+                                        </check>
+                                        > Yes</label>
+                                    <label><input class="ml-3" type="radio" name="outlook" value="no" required
+                                        <check if="{{ $_SESSION['LongAnswer']->getPositiveOutlook() == 'no'}}">
+                                            checked
+                                        </check>
+                                        > No</label>
+                                </div>
+                            </div>
+
+                            <!--Question 8-->
+                            <div class="form-row mb-0 ml-1">
+                                <div class="form-group col-md-8">
+                                    <p class="lead mb-2">{{@etsLongAnswers['q8']}}</p>
+                                    <label><input class="mt-1 ml-1" type="radio" name="background" value="yes" required
+                                        <check if="{{ $_SESSION['LongAnswer']->getBackgroundCheck() == 'yes'}}">
+                                            checked
+                                        </check>
+                                        > Yes</label>
+                                    <label><input class="ml-3" type="radio" name="background" value="no" required
+                                        <check if="{{ $_SESSION['LongAnswer']->getBackgroundCheck() == 'no'}}">
+                                            checked
+                                        </check>
+                                        > No</label>
+                                </div>
+                            </div>
+
+                            <!--Question 9-->
+                            <div class="form-group pt-5">
+                                <div class="form-group col-md-8">
+                                    <h5><label for="exampleFormControlTextarea2">{{@etsLongAnswers['q9']}}</label></h5>
+                                    <textarea name="whyPresenter" class="form-control" id="exampleFormControlTextarea2"
+                                              rows="4" maxlength="1000"
+                                    >{{ $_SESSION['LongAnswer']->getWhyPresenter() }}</textarea>
+
+                                    <!--Question 10-->
+                                    <h5><label for="exampleFormControlTextarea3" class="pt-5 mt-3">{{@etsLongAnswers['q10']}}</label>
+                                    </h5>
+                                    <textarea name="personalExperience" class="form-control"
+                                              id="exampleFormControlTextarea3" rows="4" maxlength="1000"
+                                    >{{ $_SESSION['LongAnswer']->getPersonalExperience() }}</textarea>
+
+                                    <!--Question 11-->
+                                    <h5><label for="exampleFormControlTextarea4" class="pt-5 mt-3">{{@etsLongAnswers['q11']}}</label>
+                                    </h5>
+                                    <textarea name="supportiveExperience" class="form-control"
+                                              id="exampleFormControlTextarea4" rows="4" maxlength="1000"
+                                    >{{ $_SESSION['LongAnswer']->getSupportiveExperience() }}</textarea>
+
+                                    <!--Question 12-->
+                                    <h5><label for="exampleFormControlTextarea5" class="pt-5 mt-3">{{@etsLongAnswers['q12']}}</label>
+                                    </h5>
+                                    <textarea name="recoveryMeaning" class="form-control"
+                                              id="exampleFormControlTextarea5" rows="4" maxlength="1000"
+                                    >{{ $_SESSION['LongAnswer']->getRecoveryMeaning() }}</textarea>
+
+                                    <!--Question 13-->
+                                    <h5><label for="exampleFormControlTextarea6" class="pt-5 mt-3">{{@etsLongAnswers['q13']}}</label>
+                                    </h5>
+                                    <textarea name="roles" class="form-control" id="exampleFormControlTextarea6"
+                                              rows="4" maxlength="1000"
+                                    >{{ $_SESSION['LongAnswer']->getRoles() }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <form action="additional_information" method="get">
+                    <button type="submit" name="goBack" value="goBack" class="btn btn-primary float-left">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="views/forms/js/long_answer_scripts/ETSLongAnswersScript.js"></script>
+
+<include href="views/forms/includes/footer.html"/>

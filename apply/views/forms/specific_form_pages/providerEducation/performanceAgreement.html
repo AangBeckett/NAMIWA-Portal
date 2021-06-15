@@ -1,0 +1,137 @@
+<include href="views/forms/includes/header.html"/>
+
+<div class="container p-3">
+    <h5>Progress</h5>
+    <div class="progress border" style="height: 20px">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+             style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">Almost done!
+        </div>
+    </div>
+</div>
+
+<div class="container p-3 ">
+
+    <div class="card shadow-sm bg-white rounded">
+        <h4 class="card-header">Performance Agreement for Provider Education Presenter Trainees</h4>
+        <div class="card-body m-3">
+            <div>
+                <h6 class="pb-4 text-primary font-weight-bold">
+                    <i class="fas fa-star-of-life"></i> Please read through and check all fields
+                </h6>
+
+                <form action="performance_agreement" method="post">
+                    <div class="form-check">
+                        <input name="member" class="form-check-input" required type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            I am a current NAMI member – If not, you will be required to join NAMI to attend the
+                            training.
+                        </label>
+                    </div>
+                    <hr>
+
+                    <div class="form-check">
+                        <input name="intensive" class="form-check-input" required type="checkbox" value="" id="defaultCheck2">
+                        <label class="form-check-label" for="defaultCheck2">
+                            I am willing and able to complete this intensive 2-day training and to abide by the NAMI program model.
+                        </label>
+                    </div>
+                    <hr>
+
+                    <div class="form-check">
+                        <input name="intensive" class="form-check-input" required type="checkbox" value="" id="defaultCheck3">
+                        <label class="form-check-label" for="defaultCheck2">
+                            I commit to arriving to the training on-time and staying for the full day, and understand
+                            that if I do not stay for the entire training, I will not receive a certificate of completion
+                            and would have to re-take the entire class in order to receive a certificate of completion.
+                        </label>
+                    </div>
+                    <hr>
+
+                    <div class="form-check">
+                        <input name="intensive" class="form-check-input" required type="checkbox" value="" id="defaultCheck4">
+                        <label class="form-check-label" for="defaultCheck2">
+                            <strong>I understand that I could complete the entire training, and that my skills will be
+                                evaluated by the Trainer(s), and they will decide if I have the skills to be a Provider
+                                Education Presenter. I further understand that if the Trainer(s) feel I am not ready to
+                                be a Provider Education teacher, I will not receive a certificate of completion and would
+                                have to re-take the entire class in order to receive a certificate of completion.
+                            </strong>
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="form-check">
+                        <input name="intensive" class="form-check-input" required type="checkbox" value="" id="defaultCheck5">
+                        <label class="form-check-label" for="defaultCheck2">
+                            By applying to participate in the Provider Training, I am indicating my willingness to
+                            abide by all Provider program policies, and to teach all Provider classes with complete
+                            fidelity to the approved curriculum.
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="form-check">
+                        <input name="intensive" class="form-check-input" required type="checkbox" value="" id="defaultCheck6">
+                        <label class="form-check-label" for="defaultCheck2">
+                            By applying to participate in the Provider Training, I am agreeing to teach at least one
+                            (1) complete Provider course within one (1) year of my training, and to teach at least one
+                            more course within two (2) years of my training.
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="form-check">
+                        <input name="intensive" class="form-check-input" required type="checkbox" value="" id="defaultCheck7">
+                        <label class="form-check-label" for="defaultCheck2">
+                            I will communicate promptly with the NAMI Washington state office, as requested or required,
+                            and will submit all forms and data to the state and national offices, as required by a
+                            Provider Teacher.
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="form-check">
+                        <input name="intensive" class="form-check-input" required type="checkbox" value="" id="defaultCheck8">
+                        <label class="form-check-label" for="defaultCheck2">
+                            I will work to identify potential Provider teacher-candidates who participate in my classes,
+                            so that my local affiliate will be able to educate more members of my community.
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="form-check">
+                        <input name="intensive" class="form-check-input" required type="checkbox" value="" id="defaultCheck9">
+                        <label class="form-check-label" for="defaultCheck2">
+                            I will regularly encourage my class participants to become NAMI members so that my local
+                            affiliate and NAMI Washington can continue to offer support and education to members of
+                            my community.
+                        </label>
+                    </div>
+                    <hr>
+
+                    <div class="form-row mb-5 mt-4">
+                        <div class="form-group col-md-7">
+                            <h4 class="lead mb-0"><label for="signature">Signature:</label></h4>
+                            <input required type="text" class="form-control" id="signature"
+                                   placeholder="Type your full name" name="signature">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <h4 class="lead mb-0"><label for="date">Date</label></h4>
+                            <input type="text" class="form-control" id="date" value="{{date('Y-m-d')}}" disabled>
+
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary float-right">Submit</button>
+                </form>
+
+                <form method="get" action="review">
+                    <button type="submit" class="btn btn-primary float-left"><i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<include href="views/forms/includes/footer.html"/>

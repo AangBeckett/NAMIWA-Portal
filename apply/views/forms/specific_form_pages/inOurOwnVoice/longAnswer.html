@@ -1,0 +1,263 @@
+<include href="views/forms/includes/header.html"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<div class="container p-3">
+    <h5>Progress</h5>
+    <div class="progress border" style="height: 20px">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+             style="width: 40%"
+             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%
+        </div>
+    </div>
+</div>
+
+<div class="container p-3 ">
+
+    <!-- Displays any errors with the input from the user -->
+    <check if="{{!empty(@errors)}}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <repeat group=" {{ @errors }}" key="{{ @key }}" value="{{ @error}}">
+                <h4><strong>Error:</strong> {{ @error }}</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </repeat>
+        </div>
+    </check>
+
+    <div class="card shadow-sm bg-white rounded">
+
+        <div class="card-header">
+            <h4 class="float-left pt-2"><i class="fas fa-question-circle text-primary mr-1"></i> In Our Own Voice
+                Questions</h4>
+            <check if="{{ $_GET['fromReview'] == true }}">
+                <form method="get" action="review">
+                    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-redo-alt"></i> Back to
+                        Review
+                    </button>
+                </form>
+            </check>
+        </div>
+
+        <div class="card-body m-3">
+            <div>
+
+                <h6 class="mb-5 text-primary font-weight-bold">
+                    <i class="fas fa-star-of-life"></i> All fields are required
+                </h6>
+
+                <form method="post" action="long_answer">
+                    <div class="form-row">
+
+                        <!--Question 2-->
+                        <div class="form-group col-md-10">
+                            <h5>{{@ioovLongAnswers['q2']}}</h5>
+                            <div class="form-check form-check-inline ml-2">
+                                <input name="convict" class="form-check-input" type="radio" id="yesConvict" value="yes"
+                                       required
+                                <check if="{{ $_SESSION['LongAnswer']->getConvict() == 'yes' }}">
+                                    checked
+                                </check>
+                                >
+                                <label class="form-check-label" for="yesConvict">Yes</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input name="convict" class="form-check-input" type="radio" id="noConvict" value="no"
+                                       required
+                                <check if="{{ $_SESSION['LongAnswer']->getConvict() == 'no' }}">
+                                    checked
+                                </check>
+                                >
+                                <label class="form-check-label" for="noConvict">No</label>
+                            </div>
+                            <!--Question 2a-->
+                            <div class="form-row mt-3 ml-2 none" id="convictText">
+                                <label>{{@ioovLongAnswers['q2a']}}
+                                    <textarea class="form-control" rows="4" cols="50" name="convictText" maxlength="1000"
+                                    >{{ $_SESSION['LongAnswer']->getConvictText() }}</textarea>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!--Question 5-->
+                        <div class="form-group col-md-10">
+                            <h5 class="mb-3"><strong>{{@ioovLongAnswers['q5']}}</strong></h5>
+
+                            <!--Question 5a-->
+                            <div class="mb-2">
+                                <h5 class="mb-0"><label>{{@ioovLongAnswers['q5a']}}</label></h5>
+                                <input class="form-control" type="text" name="degree" id="degree" required
+                                       value="{{ $_SESSION['LongAnswer']->getDegree() }}"
+                                       placeholder="Last degree completed">
+                            </div>
+
+                            <!--Question 5b-->
+                            <div class="mb-2">
+                                <h5 class="mb-0"><label>{{@ioovLongAnswers['q5b']}}</label></h5>
+                                <input name="volunteerExperience" type="text" class="form-control"
+                                       id="volunteerExperience"
+                                       required value="{{ $_SESSION['LongAnswer']->getVolunteerExperience() }}"
+                                       placeholder="Work/Volunteer Experience">
+                            </div>
+
+                            <!--Question 5c-->
+                            <div class="mb-2">
+                                <h5 class="mb-0"><label>{{@ioovLongAnswers['q5c']}}</label></h5>
+                                <input name="diagnose" type="text" class="form-control" id="diagnose"
+                                       required value="{{ $_SESSION['LongAnswer']->getDiagnose() }}"
+                                       placeholder="One year ago, one month ago, etc...">
+                            </div>
+
+                            <!--Question 5d-->
+                            <div class="mb-2">
+                                <h5 class="mb-0"><label>{{@ioovLongAnswers['q5d']}}</label></h5>
+                                <input name="diagnoseTime" type="text" class="form-control" id="diagnoseTime"
+                                       required value="{{ $_SESSION['LongAnswer']->getDiagnoseTime() }}">
+                            </div>
+
+                            <!--Question 5e-->
+                            <div class="mb-2">
+                                <h5 class="mb-0"><label>{{@ioovLongAnswers['q5e']}}</label></h5>
+                                <textarea name="currentDiagnosis" class="form-control" maxlength="200">{{ $_SESSION['LongAnswer']->getCurrentDiagnosis() }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-10 mb-3">
+                            <!--Question 5f-->
+                            <h5>{{@ioovLongAnswers['q5f']}}</h5>
+                            <div class="form-check form-check-inline ml-2">
+                                <input name="hospitalized" class="form-check-input" type="radio" id="yesHospitalized"
+                                       value="yes"
+                                       required
+                                <check if="{{ $_SESSION['LongAnswer']->getHospitalized() == 'yes' }}">
+                                    checked
+                                </check>
+                                >
+                                <label class="form-check-label" for="yesHospitalized">Yes</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input name="hospitalized" class="form-check-input" type="radio" id="noHospitalized"
+                                       value="no"
+                                       required
+                                <check if="{{ $_SESSION['LongAnswer']->getHospitalized() == 'no' }}">
+                                    checked
+                                </check>
+                                >
+                                <label class="form-check-label" for="noHospitalized">No</label>
+                            </div>
+
+                            <!--Question 5g-->
+                            <div class="form-row mt-3 ml-2 none" id="recentlyText">
+                                <label for="recently">{{@ioovLongAnswers['q5g']}}</label>
+                                <input class="form-control" name="recently"
+                                       value="{{ $_SESSION['LongAnswer']->getRecently() }}" id="recently">
+                            </div>
+                        </div>
+
+                        <!--Question 6-->
+                        <div class="col-md-10 mb-3">
+                            <h5>{{@ioovLongAnswers['q6']}}</h5>
+                            <div class="form-check form-check-inline ml-2">
+                                <label class="form-check-label"><input type="radio" name="speaking" value="yes"
+                                                                       class="form-check-input"
+                                    <check if="{{ $_SESSION['LongAnswer']->getSpeakingExperience() == 'yes' }}">
+                                        checked
+                                    </check>
+                                    >Yes
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline ml-2">
+                                <label class="form-check-label"><input type="radio" name="speaking" value="no"
+                                                                       class="form-check-input"
+                                    <check if="{{ $_SESSION['LongAnswer']->getSpeakingExperience() == 'no' }}">
+                                        checked
+                                    </check>
+                                    >No
+                                </label>
+                            </div>
+                        </div>
+                        <!--Question 6a-->
+                        <div class="slidecontainer">
+                            <h5><label>{{@ioovLongAnswers['q6a']}}</label></h5>
+                            <label for="comfortable" class="pull-left">1 (NOT AT ALL)</label>
+                            <label for="comfortable" class="fa-pull-right">10 (VERY)</label>
+                            <input type="range" min="1" max="10"
+                                   value="{{ $_SESSION['LongAnswer']->getComfortable() }}"
+                                   class="slider" id="comfortable" name="comfortable">
+
+                            <br>
+                            <p>Comfortable: <span id="demo"></span></p>
+                        </div>
+
+                        <!--Question 7-->
+                        <div class="col-md-10 mb-3">
+                            <h5>{{@ioovLongAnswers['q7']}}</h5>
+                            <div class="form-check form-check-inline ml-2">
+                                <label class="form-check-label"><input type="radio" name="transportation" value="yes"
+                                                                       class="form-check-input"
+                                    <check if="{{ $_SESSION['LongAnswer']->getTransportation() == 'yes' }}">
+                                        checked
+                                    </check>
+                                    >Yes
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline ml-2">
+                                <label class="form-check-label"><input type="radio" name="transportation" value="no"
+                                                                       class="form-check-input"
+                                    <check if="{{ $_SESSION['LongAnswer']->getTransportation() == 'no' }}">
+                                        checked
+                                    </check>
+                                    >No
+                                </label>
+                            </div>
+                        </div>
+
+                        <!--Question 8-->
+                        <div class="form-group col-md-10 mb2">
+                            <h5>{{@ioovLongAnswers['q8']}}</h5>
+                            <textarea name="notWantPresent" class="form-control" maxlength="1000">{{ $_SESSION['LongAnswer']->getNotWantPresent() }}</textarea>
+                        </div>
+
+                        <!--Question 9-->
+                        <div class="form-group col-md-10 mb2">
+                            <h5>{{@ioovLongAnswers['q9']}}</h5>
+                            <textarea name="whyPresenter" class="form-control" maxlength="1000">{{ $_SESSION['LongAnswer']->getWhyPresenter() }}</textarea>
+                        </div>
+
+                        <!--Question 10-->
+                        <div class="form-group col-md-10 mb2">
+                            <h5>{{@ioovLongAnswers['q10']}}</h5>
+                            <textarea name="stayedRecover" class="form-control" maxlength="1000">{{ $_SESSION['LongAnswer']->getStayedRecover() }}</textarea>
+                        </div>
+
+                        <!--Question 11-->
+                        <div class="form-group col-md-10 mb-2">
+                            <h5>{{@ioovLongAnswers['q11']}}</h5>
+                            <textarea name="recovery" class="form-control" id="recovery" maxlength="1000">{{ $_SESSION['LongAnswer']->getRecovery() }}</textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+
+                <form action="additional_information" method="get">
+                    <button type="submit" name="goBack" value="goBack" class="btn btn-primary float-left">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="views/forms/js/long_answer_scripts/IOOVLongAnswersScript.js"></script>
+
+<include href="views/forms/includes/footer.html"/>

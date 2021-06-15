@@ -1,0 +1,184 @@
+<include href="views/forms/includes/header.html"/>
+
+<div class="container p-3">
+    <h6 class="">
+        <a href="/unami" class="text-decoration-none mt-0 pt-0 text-primary">
+            <i class="fas fa-arrow-left fa-sm"></i> Back
+        </a>
+    </h6>
+    <div class="card shadow-sm bg-white rounded">
+        <h4 class="card-header">Provider Education 2020 Training Application</h4>
+        <div class="card-body m-3">
+
+            <!-- header info -->
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h5 class="mb-2"><i class="fas fa-map-marker-alt mr-1 text-primary"></i><strong> Training
+                        Location:</strong> {{ @SESSION.training_info['location'] }}</h5>
+                    <h5><i class="fas fa-reply fa-rotate-180 text-primary"></i><strong> Application Deadline:</strong>
+                        {{ date('F j, Y', strtotime(@SESSION.training_info['deadline'])) }}</h5>
+
+                    <hr>
+                    <h5><i class="far fa-calendar-alt mr-2 text-primary"></i><strong>Training Schedule:</strong></h5>
+                    <h5>{{ date('F j, Y', strtotime(@SESSION.training_info['date'])) }}</h5>
+                    <h5>{{ date('F j, Y', strtotime(@SESSION.training_info['date2'])) }}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5><i class="fas fa-info-circle mr-1 text-primary"></i><strong>NAMI Provider Education is: </strong>
+                    </h5>
+                    <h5>A five-session program for mental health professionals who
+                        work directly with individuals living with mental illness and their families.
+                        Available free of charge to participants. A series of short lectures,
+                        followed by time for elaboration of the teaching points in group discussion and group exercises.
+                        Presented by a trained team consisting of:
+                        a mental health professional who lives with a mental health condition or is a family member;
+                        a family member of an individual living with a mental health condition;
+                        and an individual with a mental health condition who is now in recovery.</h5>
+                </div>
+
+
+            </div>
+
+
+            <hr class="my-4">
+
+            <h4 class="text-center font-weight-bold pt-4 pb-2"><i class="fas fa-question-circle text-primary"></i> About
+                This Training</h4>
+            <br>
+            <hr>
+            <!-- Learning -->
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#peLearning"
+                                           role="button" aria-expanded="false" aria-controls="collapseExample">
+                    What will you learn at Provider Education? <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="peLearning">
+                    <div class="card card-body p-4">
+                        <h5>
+                            Provider Education program  goals are to introduce health care staff to the emotional stages
+                            people affected by mental illness experience on the way to recovery; to help staff gain a
+                            fresh understanding of and empathy for their clients’ lived experiences, especially during
+                            treatment and to promote collaboration between clients, families and providers to achieve
+                            the best level of recovery possible.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Presentation -->
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#pePresentation"
+                                           role="button" aria-expanded="false" aria-controls="collapseExample">
+                    What is a Provider Education presentation like?  <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="pePresentation">
+                    <div class="card card-body p-4">
+                        <h5>
+                            The sessions are organized into short lectures, discussions and group exercises presented by
+                            a trained team: an individual with a mental health condition who is living in recovery,
+                            a family member of someone with a mental health condition, and a mental health professional
+                            who has a mental health condition or is a family member. The number of presenters may vary
+                            depending on the duration of the sessions:  i.e. a four-hour seminar will require only three
+                            presenters – one from each category.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goals -->
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#peGoals" role="button"
+                                           aria-expanded="false" aria-controls="collapseExample">
+                    What are the goals of NAMI Provider Education?  <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="peGoals">
+                    <div class="card card-body p-4">
+
+                        <h5>Expose mental health staff to the various emotional stages that individuals living with
+                            mental illness and their families go through on the journey to recovery. Help mental health
+                            staff gain an empathy and understanding of the lived experience of individuals living with
+                            mental illness and their families, specifically in the areas of treatment. Promote the
+                            concept of collaboration between the individuals living with the illness, the mental health
+                            staff, and the family to achieve the best level of recovery possible.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Criteria -->
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#bwhatLearn"
+                                           role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Criteria for taking the Provider Education Presenter Training <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="bwhatLearn">
+                    <div class="card card-body p-4">
+                        <h5>
+                            Individuals wanting to be part of the Provider Education team for presentations must be NAMI
+                            members in good standing with current dues and a record in NAMI’s member management system.
+                            Individuals on the team must be 18 years of age. Presenters must meet the criteria of being
+                            able to participate in two (2) presentation series. Individuals on Provider Education
+                            presentation teams must meet one (1) of the following three (3) criteria.
+                            <ul class="list-group">
+                                <li class="list-group-item">•	Adult in recovery with a mental illness, preferably who
+                                    is also a NAMI Peer-to-Peer Mentor or an IOOV, ETS, or other presenter.
+                                </li>
+                                <li class="list-group-item">•	Family member or partner of a person with a mental illness,
+                                    preferably who is also a NAMI Basics, NAMI Family-to-Family or NAMI Homefront teacher.
+                                </li>
+                                <li class="list-group-item">•	Mental health professional that is also either a family
+                                    member of someone with a mental illness or lives with mental illness themselves.
+                                </li>
+                            </ul>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- registration -->
+            <div class="my-5">
+                <h4 class="text-center"><a class="questions" data-toggle="collapse" href="#bregistration"
+                                           role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Registration Information <i class="fas fa-level-down-alt ml-1"></i>
+                </a></h4>
+                <div class="collapse" id="bregistration">
+                    <div class="card card-body p-4">
+                        <h5>
+                            NAMI Washington will pay for meals, snacks, lodging and all training materials. Your NAMI
+                            affiliate is asked to cover your travel and other expenses that you may incur to attend
+                            this training. Lodging will be at a nearby hotel, and is <strong>double occupancy.</strong>
+                            If you prefer/require single occupancy, arrangements will need to be made prior to attendance
+                            by the attendee and there will be additional costs which will be the responsibility of the
+                            attendee. Attending the training is by <strong>pre-registration only,</strong> and class
+                            size is limited. If there are more applications than spots for the class, a waiting list
+                            will be created.
+                        </h5>
+                        <hr>
+                        <h5>
+                            In order to reserve a space, a $50 refundable registration deposit <strong>from your
+                            affiliate</strong> is required at the time of registration. If you need to cancel after
+                            being accepted,  notify the NAMI Washington staff no later than a week before the training
+                            so we can fill your spot, or your affiliate will lose its $50 registration deposit. Since
+                            this is a team program, cancelled spots can be filled with another member of the Affiliate
+                            who would fulfill the team spot.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- start -->
+            <div class="text-center my-4 mt-5 pt-2">
+                <h3 class="font-weight-bold mb-3">Ready to start the application?</h3>
+                <a class="btn btn-primary btn-lg text-uppercase px-5" href="personal_information"
+                   role="button">Start</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<include href="views/forms/includes/footer.html"/>
