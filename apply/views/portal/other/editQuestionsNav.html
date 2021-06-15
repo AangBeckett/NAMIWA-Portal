@@ -1,0 +1,21 @@
+<include href="views/portal/includes/header.html"/>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <h1>Editing Questions</h1>
+    <ul>
+        <repeat group="{{ @trainings }}" value="{{ @training }}">
+            <form method="post">
+                <li>
+                    <h3><a href="question_edit?type={{@training['ref_name'] }}">{{ @training['app_type'] }}</a></h3>
+                </li>
+                <input type="hidden" name="trainingType" value="{{ @training['ref_name'] }}">
+            </form>
+        </repeat>
+    </ul>
+</div>
+<!-- /.container-fluid -->
+
+<!-- End of Main Content -->
+
+<include href="views/portal/includes/footer.html"/>

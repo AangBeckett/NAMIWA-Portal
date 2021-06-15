@@ -1,0 +1,272 @@
+<include href="views/portal/includes/header.html"/>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h2 mb-2 text-primary"><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+           data-toggle="modal" data-target="#exportModal">
+            <i class="fas fa-download fa-sm text-white-50"></i>
+            Export Applications
+        </a>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="active" class="text-decoration-none">
+                <div class="card border-left-primary shadow h-100 py-2 statusCards">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Active</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ @numActive['NumApplicants'] }}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-users fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="trainings" class="text-decoration-none">
+                <div class="card border-left-success shadow h-100 py-2 statusCards">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Open Trainings
+                                </div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{
+                                            @numTrainings['Trainings'] }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="far fa-calendar-alt fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="waitlist" class="text-decoration-none">
+                <div class="card border-left-warning shadow h-100 py-2 statusCards">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Waitlist</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ @numWaitlisted['NumApplicants']
+                                    }}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-stopwatch fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="archive" class="text-decoration-none">
+                <div class="card border-left-danger shadow h-100 py-2 statusCards">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Archive</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ @numArchived['NumApplicants']
+                                    }}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-archive fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+    </div>
+
+    <!-- Content Row -->
+
+    <div class="row">
+
+        <!-- Pie Chart -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Active Application Statuses</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-info"></i> Submitted
+                    </span>
+                        <span class="mr-2">
+                      <i class="fas fa-circle text-warning"></i> Approved
+                    </span>
+                        <span class="mr-2">
+                      <i class="fas fa-circle text-danger"></i> Denied
+                    </span>
+                        <span class="mr-2">
+                      <i class="fas fa-circle text-success"></i> Completed
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Area Chart -->
+        <div class="col-xl-8 col-lg-7 d-flex">
+            <!-- Project Card Example -->
+            <div class="card shadow mb-4 flex-fill">
+
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Affiliates Running Behind</h6>
+                </div>
+
+                <div class="card-body">
+                    <h4 class="small font-weight-bold">{{ @first['affiliateName1'] }}<span class="float-right">{{@firstPercentage['firstPercentage']}}% incomplete</span>
+                    </h4>
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-danger" role="progressbar"
+                             style="width: {{@firstPercentage['firstPercentage']}}%"
+                             aria-valuenow="{{@firstPercentage['firstPercentage']}}" aria-valuemin="0"
+                             aria-valuemax="100"></div>
+                    </div>
+
+                    <h4 class="small font-weight-bold">{{ @second['affiliateName2'] }}<span class="float-right">{{@secondPercentage['secondPercentage']}}% incomplete</span>
+                    </h4>
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-warning" role="progressbar"
+                             style="width: {{@secondPercentage['secondPercentage']}}%"
+                             aria-valuenow="{{@secondPercentage['secondPercentage']}}" aria-valuemin="0"
+                             aria-valuemax="100"></div>
+                    </div>
+
+                    <h4 class="small font-weight-bold">{{ @third['affiliateName3'] }}<span class="float-right">{{@thirdPercentage['thirdPercentage']}}% incomplete</span>
+                    </h4>
+                    <div class="progress mb-4">
+                        <div class="progress-bar" role="progressbar"
+                             style="width: {{@thirdPercentage['thirdPercentage']}}%"
+                             aria-valuenow="{{@thirdPercentage['thirdPercentage']}}" aria-valuemin="0"
+                             aria-valuemax="100"></div>
+                    </div>
+
+                    <h4 class="small font-weight-bold">{{ @fourth['affiliateName4'] }}<span class="float-right">{{@fourthPercentage['fourthPercentage']}}% incomplete</span>
+                    </h4>
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-info" role="progressbar"
+                             style="width: {{@fourthPercentage['fourthPercentage']}}%"
+                             aria-valuenow="{{@fourthPercentage['fourthPercentage']}}" aria-valuemin="0"
+                             aria-valuemax="100"></div>
+                    </div>
+
+                    <h4 class="small font-weight-bold">{{ @fifth['affiliateName5'] }}<span class="float-right">{{@fifthPercentage['fifthPercentage']}}% incomplete</span>
+                    </h4>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar"
+                             style="width: {{@fifthPercentage['fifthPercentage']}}%"
+                             aria-valuenow="{{@fifthPercentage['fifthPercentage']}}" aria-valuemin="0"
+                             aria-valuemax="100"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Content Column -->
+        <div class="col-lg-12 mb-4">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Applications Submitted (Past 12 Months)</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="myBarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+<!-- export Modal-->
+<div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title text-white" id=""><i class="fas fa-download"></i> Export Applications to Excel
+                </h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form method="post">
+                    <repeat group="{{ @app_types }}" value="{{ @formType }}" counter="{{ @counter }}">
+
+            <span>{{ @formType['app_type'] }}
+                  <button class="btn btn-primary float-right" type="submit" name="formType"
+                          value="{{ @formType['app_id'] }}">Export</button>
+            </span>
+
+                        <hr>
+                    </repeat>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="#">Export</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<include href="views/portal/includes/footer.html"/>
+

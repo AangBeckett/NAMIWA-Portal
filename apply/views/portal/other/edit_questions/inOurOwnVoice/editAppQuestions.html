@@ -1,0 +1,20 @@
+<include href="views/portal/other/edit_questions/header.html"/>
+
+<!-- Begin Page Content -->
+<div class="container">
+    <h1>Edit In Our Own Voice Questions</h1>
+    <repeat group="{{ @ioovQuestions }}" value="{{ @question }}" counter="{{ @ctr}}">
+        <div class="button-container">
+            <form method="post" action="#">
+                <label><h3>{{ substr_replace(@ioovKeys[@ctr - 1], 'Question ', 0, 1) }}:</h3>
+                    <textarea class="form-control" rows="2" cols="80" name="newText">{{@question}}</textarea>
+                </label>
+                <button class="btn btn-success btn-lg align-to-textarea" type="submit" name="editQs">Edit</button>
+                <input type="hidden" name="questionId" value="{{@ioovKeys[@ctr - 1]}}">
+            </form>
+        </div>
+    </repeat>
+</div>
+<!--End of Main Content-->
+
+<include href="views/portal/includes/footer.html"/>

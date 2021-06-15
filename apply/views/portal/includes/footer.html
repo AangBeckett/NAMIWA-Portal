@@ -1,0 +1,190 @@
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white mt-5">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; NAMI WA 2019</span>
+        </div>
+    </div>
+</footer>
+<!-- End of Footer -->
+
+<!-- Bootstrap core JavaScript-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<!-- jQuery easing  -->
+<script src="views/portal/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Data tables -->
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="views/portal/js/customDatatables.js"></script>
+
+<!-- Custom scripts for all pages -->
+<script src="views/portal/js/sb-admin-2.min.js"></script>
+
+<!-- Chart.js -->
+<script src="views/portal/vendor/chart.js/Chart.min.js"></script>
+
+<script>
+    //hover animation - cards
+    $(document).ready(function() {
+        $( ".card" ).hover(
+            function() {
+                $(this).addClass('shadow-lg');
+            }, function() {
+                $(this).removeClass('shadow-lg');
+            }
+        );
+    });
+</script>
+
+<!-- custom charts -->
+<!-- application statuses -->
+<script>
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#858796';
+
+    var complete = "{{ @numComplete['Complete'] }}";
+    var submit = "{{ @numSubmitted['Submitted'] }}";
+    var approved = "{{ @numApproved['Approved'] }}";
+    var denied = "{{ @numDenied['Denied'] }}";
+
+    // Pie Chart Example
+    var ctx = document.getElementById("myPieChart");
+    var myPieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Submitted", "Approved", "Denied", "Completed"],
+            datasets: [{
+                data: [submit, approved, denied, complete],
+                backgroundColor: ['#36b9cc', '#f6c23e', '#e74a3b', '#1cc88a'],
+                hoverBorderColor: "rgba(234, 236, 244, 1)",
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            tooltips: {
+                backgroundColor: "rgb(255,255,255)",
+                bodyFontColor: "#858796",
+                borderColor: '#dddfeb',
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                caretPadding: 10,
+            },
+            legend: {
+                display: false
+            },
+            cutoutPercentage: 80,
+        },
+    });
+</script>
+
+<!--Bar chart for Applications Submitted by Year-->
+<script>
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#858796';
+
+
+    var AppSubmit = "{{@numApplicationByMonthYear['AppSubmit'] }}";
+    var MonthYear = "{{@numDate['MonthYear']}}";
+    var submit = "{{ @numSubmitted['Submitted'] }}";
+    var labels = {{ @labelDataForGraph | raw }};
+    var data = {{ @barDataForGraph | raw }};
+
+    console.log(labels[0]);
+    console.log(data[0]);
+
+
+    // Pie Chart Example
+        var ctx = document.getElementById("myBarChart");
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: '#36b9cc',
+                    hoverBorderColor: "rgba(234, 236, 244, 250)",
+
+                }]
+            },
+
+            options: {
+
+                scales: {
+                    yAxes: [{
+                      scaleLabel: {
+                        display: true,
+                        labelString: 'Total Application Per Month'
+                      }
+                    }]
+                  },
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 1,
+            },
+        });
+</script>
+
+<!--Affiliates W/ Most Pending-->
+<script>
+var first = "{{ @first['affiliateName1'] }}"
+var second = "{{ @second['affiliateName2'] }}"
+var third = "{{ @third['affiliateName3'] }}"
+var fourth = "{{ @fourth['affiliateName4'] }}"
+var fifth = "{{ @fifth['affiliateName5'] }}"
+
+var firstPercentage = "{{@firstPercentage['firstPercentage']}}"
+var secondPercentage = "{{@secondPercentage['secondPercentage']}}"
+var thirdPercentage = "{{@thirdPercentage['thirdPercentage']}}"
+var fourthPercentage = "{{@fourthPercentage['fourthPercentage']}}"
+var fifthPercentage = "{{@fifthPercentage['fifthPercentage']}}"
+
+$('.progress mb-4').sort(function (a, b) {
+
+      var contentA =parseInt( $(a).attr('aria-valuenow'));
+      var contentB =parseInt( $(b).attr('aria-valuenow'));
+      return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+   });
+</script>
+
+</body>
+
+</html>

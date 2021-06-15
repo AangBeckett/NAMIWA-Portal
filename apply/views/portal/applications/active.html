@@ -1,0 +1,298 @@
+<include href="views/portal/includes/header.html"/>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h2 mb-4 text-primary"><i class="fas fa-users"></i> Active Applications </h1>
+
+    <check if="{{ @emailSent == true }}">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Email was sent to {{ @affiliateName }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </check>
+
+    <!-- metrics -->
+    <div class="row mb-4 pt-2">
+        <!-- submitted -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2 statusCards">
+                <a href="#" class="text-decoration-none statusButtons" data-value="submitted">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Submitted</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ @submitted['Submitted'] }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-arrow-alt-circle-up fa-2x text-info"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- approved -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2 statusCards">
+                <a href="#" class="text-decoration-none statusButtons" data-value="approved">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Approved</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ @approved['Approved'] }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-exclamation-circle fa-2x text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- denied -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2 statusCards">
+                <a href="#" class="text-decoration-none statusButtons" data-value="denied">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Denied</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ @denied['Denied'] }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-times-circle fa-2x text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- complete -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2 statusCards">
+                <a href="#" class="text-decoration-none statusButtons" data-value="complete">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Completed</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ @complete['Complete'] }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-check-circle fa-2x text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Content Row -->
+
+    <!-- active applications data table -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h5 class="m-0 text-gray-800">Showing All <strong>{{ @active['NumApplicants'] }}</strong> Active Applications</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="activeDataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr class="bg-primary text-white">
+                            <th>Status</th>
+                            <th>Name</th>
+                            <th>Affiliate</th>
+                            <th>Training</th>
+                            <th>Email</th>
+                            <th>Date Submitted</th>
+                            <th>Edit</th>
+                            <th>View</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr class="bg-light">
+                            <th>Status</th>
+                            <th>Name</th>
+                            <th>Affiliate</th>
+                            <th>Training</th>
+                            <th>Email</th>
+                            <th>Date Submitted</th>
+                            <th>Edit</th>
+                            <th>View</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <!-- all active applicants -->
+                        <repeat group="{{ @ActiveApplicants }}" value="{{ @ActiveApplicant }}">
+                            <tr>
+                                <!-- check app status for icons -->
+                                <!-- denied -->
+                                <check if="{{ @ActiveApplicant['AppStatus'] == 0 }}">
+                                    <td class="text-center text-danger">
+                                        <i class="fas fa-times-circle fa-lg"></i>
+                                        <span class="sr-only">Denied</span>
+                                    </td>
+                                </check>
+
+                                <!-- submitted -->
+                                <check if="{{ @ActiveApplicant['AppStatus'] == 1 }}">
+                                    <td class="text-center text-info">
+                                        <i class="fas fa-arrow-alt-circle-up fa-lg"></i>
+                                        <span class="sr-only">Submitted</span>
+
+                                    </td>
+                                </check>
+
+                                <!-- approved -->
+                                <check if="{{ @ActiveApplicant['AppStatus'] == 2 }}">
+                                    <td class="text-center text-warning">
+                                        <i class="fas fa-exclamation-circle fa-lg"></i>
+                                        <span class="sr-only">Approved</span>
+                                    </td>
+                                </check>
+
+                                <!-- complete -->
+                                <check if="{{ @ActiveApplicant['AppStatus'] == 3 }}">
+                                    <td class="text-center text-success">
+                                        <i class="fas fa-check-circle fa-lg"></i>
+                                        <span class="sr-only">Complete</span>
+                                    </td>
+                                </check>
+
+                                <!-- name, affiliate, training -->
+                                <td>{{ @ActiveApplicant['Name'] }}</td>
+                                <td>{{ @ActiveApplicant['Affiliate'] }}</td>
+                                <td>{{ @ActiveApplicant['Training'] }} {{ date('F Y', strtotime(@ActiveApplicant['Date']))}}</td>
+
+                                <!-- mailto applicant email -->
+                                <td>
+                                    <a  class="text-decoration-none text-body"
+                                        href="mailto: {{ @ActiveApplicant['Email'] }}">
+                                        {{ @ActiveApplicant['Email'] }}
+                                    </a>
+                                </td>
+
+                                <!-- date submitted, order w raw date -->
+                                <td data-order="{{ @ActiveApplicant['DateSubmitted'] }}">
+                                    {{ date('m/d/Y', strtotime(@ActiveApplicant['DateSubmitted'])) }}
+                                </td>
+
+                                <!-- edit -> modal -- use ID here -->
+                                <td class="text-center">
+                                    <a href="#" class="text-decoration-none text-primary" data-toggle="modal" data-target="#modal{{ @ActiveApplicant['ID'] }}">
+                                        <i class="fas fa-edit fa-lg"></i>
+                                    </a>
+                                </td>
+
+                                <!-- view -- use ID here -->
+                                <td class="text-center">
+                                    <a href="{{ @ActiveApplicant['ID'] }}" class="text-decoration-none text-primary">
+                                        <i class="fas fa-external-link-square-alt fa-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <!-- edit modal -->
+                            <div class="modal fade" id="modal{{ @ActiveApplicant['ID'] }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="modal{{ @ActiveApplicant['ID'] }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header bg-primary">
+                                            <h4 class="modal-title text-white" id="modalLabel">
+                                                <i class="fas fa-edit"></i> Edit
+                                                <span class="font-weight-bold">{{ @ActiveApplicant['Name'] }}'s</span>
+                                                Application
+                                            </h4>
+
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <!-- edit form -->
+                                        <form action="active" method="post">
+                                            <div class="modal-body">
+
+                                                <input type="hidden" value="{{ @ActiveApplicant['ID'] }}" name="id">
+
+                                                <h5><i class="fas fa-suitcase mr-1 text-primary"></i>Move Application</h5>
+                                                <div class="form-row mb-3">
+                                                    <div class="form-group col-md-6">
+                                                        <label class="sr-only" for="category">Location</label>
+                                                        <select id="category" class="form-control" name="category">
+                                                            <repeat group="{{ @applicationCategories }}" key="{{ @DBvalue }}" value="{{ @category }}">
+                                                                <option value="{{ @DBvalue }}"
+                                                                    <check if="{{ @DBvalue == @ActiveApplicant['Category'] }}">
+                                                                        selected
+                                                                    </check>>
+                                                                {{ @category }}
+                                                                </option>
+                                                            </repeat>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <h5><i class="fas fa-exchange-alt mr-1 text-primary"></i>Change Status</h5>
+                                                <div class="form-row mb-3">
+                                                    <div class="form-group col-md-6">
+                                                        <label class="sr-only" for="category">Status</label>
+                                                        <select id="status" class="form-control" name="status">
+                                                            <repeat group="{{ @applicationStatuses }}" key="{{ @DBvalue }}" value="{{ @status }}">
+                                                                <option value="{{ @DBvalue }}"
+                                                                <check if="{{ @DBvalue == @ActiveApplicant['AppStatus'] }}">
+                                                                    selected
+                                                                </check>>
+                                                                {{ @status }}
+                                                                </option>
+                                                            </repeat>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <h5><i class="fas fa-pen-alt mr-1 text-primary"></i>Add Notes</h5>
+                                                <div class="form-row mb-2">
+                                                    <div class="form-group col-md-10">
+                                                        <label class="sr-only" for="notes">Notes</label>
+                                                        <textarea class="form-control" id="notes" rows="4" name="notes">{{ @ActiveApplicant['Notes'] }}</textarea>
+                                                    </div>
+                                                </div>
+
+                                                <h5><i class="fas fa-envelope mr-1 text-primary"></i>Resend Affiliate Email</h5>
+                                                <div class="form-row mb-2">
+                                                    <div class="form-group col-md-10">
+                                                        <button class="btn btn-primary" type="submit" name="resendEmail"
+                                                                value="{{ @ActiveApplicant['AffiliateID'] }}">Resend
+                                                            Email to {{ @ActiveApplicant['Affiliate'] }}</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" name="update" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </repeat>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+<include href="views/portal/includes/footer.html"/>
