@@ -65,6 +65,7 @@ $f3->route('GET|POST /personal_information', function ($f3) {
         }
 
         $member = $_POST['member'];
+        $login = $_POST['login'];
         $emergency_name = $_POST['emergency_name'];
         $emergency_phone = $_POST['emergency_phone'];
 
@@ -75,6 +76,7 @@ $f3->route('GET|POST /personal_information', function ($f3) {
         $f3->set('pronouns', $pronouns);
         $f3->set('dateOfBirth', $dateOfBirth);
         $f3->set('member', $member);
+        $f3->set('login', $login);
         $f3->set('affiliate', $affiliate);
         $f3->set('address', $address);
         $f3->set('address2', $address2);
@@ -91,7 +93,7 @@ $f3->route('GET|POST /personal_information', function ($f3) {
         $f3->set('emergency_phone', $emergency_phone);
 
         $_SESSION['PersonalInfo'] = new PersonalInfo($first, $preferred, $last, $pronouns, $address, $address2, $city, $state, $zip,
-            $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $email, $preference, $affiliate, $member,
+            $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $email, $preference, $affiliate, $member, $login,
             $emergency_name, $emergency_phone, $_POST['day'], $_POST['month'], $_POST['year']);
 
         //if not Washington State affiliate
@@ -117,7 +119,7 @@ $f3->route('GET|POST /personal_information', function ($f3) {
     if (!isset($_SESSION['PersonalInfo'])) {
         $_SESSION['PersonalInfo'] = new PersonalInfo('', '', '', '', '', '',
             '', '', '', '', '', '', '', '',
-            '', '', '', '', '', '', '', '');
+            '', '', '', '', '', '', '', '', '');
     }
 
     $view = new Template();
