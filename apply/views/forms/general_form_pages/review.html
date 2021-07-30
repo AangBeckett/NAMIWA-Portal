@@ -1,4 +1,5 @@
-<include href="views/forms/includes/header.html"/>
+<!DOCTYPE html>
+<include href="views/forms/includes/header.html">
 
 <div class="container p-3">
     <h5>Progress</h5>
@@ -85,6 +86,8 @@
                     <div class="col-md-6 pl-0">
                         <h6 class="pl-2"><span class="font-weight-bold">NAMI Member:</span> {{
                             $_SESSION['PersonalInfo']->getMember() }}</h6>
+                            <h6 class="pl-2"><span class="font-weight-bold">NAMI Login:</span> {{
+                            $_SESSION['PersonalInfo']->getLogin() }}</h6>
                     </div>
                 </div>
 
@@ -318,4 +321,4 @@
 </div>
 <!-- end container -->
 
-<include href="views/forms/includes/footer.html"/>
+<include href="views/forms/includes/footer.html">
