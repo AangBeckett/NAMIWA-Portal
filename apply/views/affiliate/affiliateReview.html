@@ -40,6 +40,8 @@
                     <check if="{{ @applicant['pname'] }}"> "{{ @applicant['pname'] }}"</check>
                     {{ @applicant['lname'] }}
                 </h4>
+                <br>
+                <h4> Training Session: {{ @applicant['Training'] }} {{ date('F Y', strtotime(@applicant['Day1']))}}</h4>
             </div>
 
             <div class="card-body m-3">
@@ -78,7 +80,7 @@
                     <div class="row m-1 mb-2">
                         <div class="col-md-12 pl-0">
                             <h6 class="pl-2"><span class="font-weight-bold">Address:</span>
-                                {{ @applicant['address'] }} {{ @applicant['address2'] }}
+                                {{ @applicant['address'] }} {{ @applicant['address2'] }},
                                 {{ @applicant['city'] }}, {{ @applicant['state'] }} {{ @applicant['zip'] }}
                             </h6>
                         </div>
@@ -112,6 +114,12 @@
                                 <check if="{{ @applicant['NAMI_member'] == 1 }}">
                                     <true>Is a NAMI member</true>
                                     <false>Is not a NAMI member</false>
+                                </check>
+                            </h6>
+                            <h6 class="pl-2"><span class="font-weight-bold">NAMI Login:</span>
+                                <check if="{{ @applicant['NAMI_login'] == 1 }}">
+                                    <true>Has a NAMI login</true>
+                                    <false>Does not have a NAMI login</false>
                                 </check>
                             </h6>
                         </div>
@@ -308,12 +316,12 @@
 
         <div class="card mb-3 shadow-sm bg-white rounded">
             <div class="card-header">
-                <h4 class="float-left">Notes</h4>
+                <h4 class="float-left">Additional Information</h4>
             </div>
             <div class="card-body m-3">
                 <div class="row m-3">
                     <div class="col-md-12 pl-0">
-                        <h5 class="lead">Please write any notes you have on this application here: </h5>
+                        <h5 class="lead">Please add any additional or missed information for this application here: </h5>
                         <label>Notes:
                             <textarea name="affiliateNotes" class="form-control" rows="4" cols="100">{{ @applicant['notes'] }}</textarea>
                         </label>
@@ -337,17 +345,152 @@
                             </div>
                         </div>
                         <br>
-                        <button type="submit" name="saveNotes" value="save" class="btn btn-primary float-center">
-                            Save
-                        </button>
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
 
-        <div class="card py-2 shadow-sm bg-white rounded">
-            <div class="card-body">
 
+
+ <div class="card mb-3 shadow-sm bg-white rounded">
+            <div class="card-header">
+                <h4 class="float-left">Affiliate To Do List</h4>
+            </div>
+            <div class="card-body m-3">
+               
+<div>
+        <a href="affiliateToDos.pdf" target="_blank" download>
+            <button id="download" class="btn btn-primary">Download as PDF</button>
+        </a>
+        <br><br>
+    </div>
+      <h3>Final section must be completed by affiliate leadership (i.e.: Program Director, Executive Director,
+        President or Vice President).</h3>
+          <div class="form-check">
+            <input class="form-check-input" required type="checkbox" value="" id="check1">
+            <label class="form-check-label" for="check1">
+                I have had a conversation with the applicant about their commitment to a two-year contract with NAMI Washington and responsibilities to our affiliate.
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" required type="checkbox" value="" id="check2">
+            <label class="form-check-label" for="check2">
+                This person is a current member of our affiliate.
+                <b>Membership Expiration Date :</b>
+                <input type="date" id="membershipExpiration" name="membershipExpiration" min="{{date('Y-m-d')}}"
+                       required>
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" required type="checkbox" value="" id="check3">
+            <label class="form-check-label" for="check3">
+                This person meets the requirements to attend this training per the NAMI Education Program Overview for 2019, and has the qualities to be a successful teacher/presenter/facilitator.
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" required type="checkbox" value="" id="check4">
+            <label class="form-check-label" for="check4">
+                Our affiliate will work with this person to initiate or continue this program during the next year.
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" required type="checkbox" value="" id="check5">
+            <label class="form-check-label" for="check5">
+                I have arranged for any accommodations the applicant may need in order to participate in the training they have applied for.
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" required type="checkbox" value="" id="check6">
+            <label class="form-check-label" for="check6">
+                I understand that if the applicant cancels too close to the deadline for their chosen session or does not complete the training in question, a $50 invoice may be sent.
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" required type="checkbox" value="" id="check7">
+            <label class="form-check-label" for="check7">
+                I understand that this training is on a first come, first serve basis after the completed application
+                and deposit has been received in the NAMI WA office. Where necessary, priority may be given to
+                geographical areas with critical need, and this will be a decision made by NAMI WA.
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" required type="checkbox" value="" id="check8">
+            <label class="form-check-label" for="check8">
+                This affiliate has submitted all 2020 Education Data to the NAMI Data Collection Site. I understand that
+                no members from our affiliate will be able to participate in a State Training if our Education Data is
+                not uploaded.
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" required type="checkbox" value="" id="check9">
+            <label class="form-check-label" for="check9">
+                This affiliate is up to date with submission of all 2020 Education Data to the NAMI Data Collection
+                Site.
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label"><input required type="radio" name="affiliateType" value="affiliateA">
+                Affiliate A
+            </label>
+            <label class="form-check-label"><input type="radio" name="affiliateType" value="affiliateB">
+                Affiliate B
+            </label>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <label for="leaderName">Name of NAMI Affiliate Leader: <input type="text" id="leaderName"
+                                                                                  name="leaderName"
+                                                                                  class="form-control"
+                                                                                  required></label>
+                </div>
+                <div class="col">
+                    <label for="leaderTitle">Title of NAMI Affiliate Leader: <input type="text" id="leaderTitle"
+                                                                                    name="leaderTitle"
+                                                                                    class="form-control"
+                                                                                    required></label>
+                </div>
+                <div class="col">
+                    <label for="affiliateName">Name of NAMI Affiliate: <input type="text" id="affiliateName"
+                                                                              name="affiliateName"
+                                                                              class="form-control"
+                                                                              required></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="signature">Signature (Type your name): <input type="text" id="signature" name="signature"
+                                                             class="form-control"
+                                                             required></label>
+                </div>
+                <div class="col">
+                    <label for="date">Date: <input type="date" value="{{ date('Y-m-d')}}"
+                                                   class="form-control" id="date" disabled></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="leaderEmail">Email of Affiliate Leader: <input type="text" id="leaderEmail"
+                                                                               name="leaderEmail"
+                                                                               class="form-control"
+                                                                               required></label>
+                </div>
+                <div class="col">
+                    <label for="phoneNumber">Phone Number: <input type="text" id="phoneNumber" name="phoneNumber"
+                                                                  class="form-control"
+                                                                  required></label>
+                </div>
+            </div>
+        </div>
+           <div>
+        <br>
+        <p>Please save a copy of this application for your records. Remember that if the applicant cancels or does not graduate from the training class, an invoice will be sent for $50 for each applicant.</p>
+    </div>
+</div>
+</div>
+
+        <div class="card py-2 shadow-sm bg-white rounded"><div class="card-body">
+              
                 <button type="submit" class="btn btn-danger float-left" name="newStatus" value="0">Deny</button>
 
                 <button type="submit" class="btn btn-success float-right" name="newStatus" value="2">Approve</button>
