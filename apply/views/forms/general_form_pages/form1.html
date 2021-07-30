@@ -106,6 +106,17 @@
                                     <check if="{{$_SESSION['PersonalInfo']->getMember() === 'no'}}">checked</check>
                                     >
                                     No</label>
+                                    <h4 class="lead">Do you have a Nami.org login/password?</h4>
+                                <label class="mt-1">
+                                    <input required type="radio" name="login" value="yes"
+                                    <check if="{{$_SESSION['PersonalInfo']->getLogin() === 'yes'}}">checked</check>
+                                    >
+                                    Yes</label>
+                                <label class="ml-3">
+                                    <input required type="radio" name="login" value="no"
+                                    <check if="{{$_SESSION['PersonalInfo']->getLogin() === 'no'}}">checked</check>
+                                    >
+                                    No</label>
                                 <a href="#" class="ml-5" data-toggle="tooltip"
                                    title="If you're not already a member, you will need to register before your training"
                                 ><i class="fas fa-info-circle text-primary"></i></a>
@@ -192,7 +203,7 @@
                     <div class="form-row pt-2">
                         <div class="form-group col-md-6">
                             <h5 class="mb-0"><label for="primary">Primary phone number</label></h5>
-                            <input name="primary" type="tel" class="form-control" id="primary"
+                            <input name="primary" type="tel" class="form-control" id="primary" 
                                    placeholder="253 474 2189"
                                    required value="{{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}">
                         </div>
@@ -210,7 +221,7 @@
                         <div class="form-group col-md-6">
                             <h5 class="mb-0"><label for="alternate">Alternate phone number <i
                                     class="far fa-check-circle fa-xs text-primary"></i></label></h5>
-                            <input name="alternate" type="tel" class="form-control" id="alternate"
+                            <input name="alternate" type="tel" class="form-control" id="alternate" 
                                    placeholder="253 847 3020"
                                    value="{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}">
                         </div>
@@ -257,7 +268,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <h5 class="mb-0"><label for="emergency_phone">Emergency contact phone</label></h5>
-                            <input name="emergency_phone" type="tel" class="form-control" id="emergency_phone"
+                            <input name="emergency_phone" type="tel" class="form-control" id="emergency_phone" 
                                    placeholder="206 123 1234" required
                                    value="{{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}">
                         </div>
@@ -316,7 +327,7 @@
         emergency_phone.value = phoneFormat(emergency_phone.value);
     });
 
-</script>
+</script> 
 
 <script src="views/forms/js/form1.js"></script>
-<include href="views/forms/includes/footer.html"/>
+<include href="views/forms/includes/footer.html"></include>
