@@ -57,7 +57,7 @@ class PersonalInfo
      */
     public function __construct($_fname, $_pname, $_lname, $_pronouns, $_address, $_address2, $_city, $_state, $_zip,
                                 $_primaryPhone, $_primaryTime, $_alternatePhone, $_alternateTime, $_email, $_preference,
-                                $_affiliate, $_member, $_emergency_name, $_emergency_phone, $_dobDay, $_dobMonth, $_dobYear)
+                                $_affiliate, $_member, $_login, $_emergency_name, $_emergency_phone, $_dobDay, $_dobMonth, $_dobYear)
     {
         $this->_fname = $_fname;
         $this->_pname = $_pname;
@@ -76,6 +76,7 @@ class PersonalInfo
         $this->_preference = $_preference;
         $this->_affiliate = $_affiliate;
         $this->_member = $_member;
+        $this->_login = $_login;
         $this->_emergency_name = $_emergency_name;
         $this->_emergency_phone = $_emergency_phone;
         $this->_dobDay = $_dobDay;
@@ -217,6 +218,13 @@ class PersonalInfo
     public function getMember()
     {
         return $this->_member;
+    }
+    /**Getter for whether they have a NAMI login
+     *  @return mixed yes or no
+     * */
+       public function getLogin()
+    {
+        return $this->_login;
     }
 
     /** Getter for emergency contact's name
