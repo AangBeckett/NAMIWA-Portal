@@ -77,7 +77,7 @@
                     <!-- address -->
                     <div class="row m-1 mb-2">
                         <h6 class="pl-2"><span class="font-weight-bold">Address:</span>
-                            {{ @applicant['address'] }} {{ @applicant['address2'] }}
+                            {{ @applicant['address'] }} {{ @applicant['address2'] }},
                             {{ @applicant['city'] }}, {{ @applicant['state'] }} {{ @applicant['zip'] }}
                         </h6>
                     </div>
@@ -106,6 +106,12 @@
                             <check if="{{ @applicant['NAMI_member'] == 1 }}">
                                 <true>Is a NAMI member</true>
                                 <false>Is not a NAMI member</false>
+                            </check>
+                        </h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">NAMI Login:</span>
+                            <check if="{{ @applicant['NAMI_login'] == 1 }}">
+                                <true>Has a NAMI login</true>
+                                <false>Does not have a NAMI login</false>
                             </check>
                         </h6>
                     </div>
