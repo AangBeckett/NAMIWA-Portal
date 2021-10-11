@@ -9,7 +9,8 @@ require "/home/$user/config_email.php";
  * @author Maxwell Lee
  * @author Trang Luu
  * @author Olivia Ringhiser
- * Date: 6/14/2020
+ * @author Dhruv Kapu
+ * Date: 7/1/2021
  */
 class Emailer
 {
@@ -27,8 +28,29 @@ class Emailer
         $linkHashedId = str_replace('/', '-', $hashedId);
         $applicantName = $fname . ' ' . $lname;
 
+        $applicant = $db->getApplicant($applicant_id);
+
+        $app_type = $applicant['app_type'];
+
         $toEmail = $db->getAffiliateEmail($affiliate);
         $toEmailAlias = $db->getAffiliateName($affiliate);
+
+        $mental_condition = "an individual with a mental health condition.";
+        if ($app_type == "Family Support Group" || $app_type == "Family-to-Family" || $app_type == "Basics") {
+            $mental_condition = "a family member of an individual with a mental health condition.";
+        }
+        if ($app_type == "Peer-to-Peer" || $app_type == "In Our Own Voice") {
+            $mental_condition = "an individual with a mental health condition.";
+        }
+        if ($app_type == "Ending the Silence") {
+            $mental_condition = "either an individual between 18 and 35 who identifies with a mental health condition; or a Adult who is either individual who identifies with a mental health condition or is a family member of someone who does.";
+        }
+        if ($app_type == "Provider Education") {
+            $mental_condition = "an individual with a mental health condition, family member of an individual with a mental health condition, or a mental health professional who is either an individual/family member of someone with a condition. Every affiliate with applicants must have at least one applicant from each of these groups.";
+        }
+        if ($app_type == "Homefront") {
+            $mental_condition = "a family member of a veteran with a mental health condition.";
+        }
 
         try {
             $message = (new Swift_Message('Review Application: ' . $applicantName))
@@ -47,13 +69,32 @@ class Emailer
                 </div>
                 
                 <div>
-                    <p>Please review $applicantName's application: 
-                    <a href="http://apply.namiwa.org/apply/affiliate_review/$applicantId/$linkHashedId">Here</a></p>
-                    <p>Please make sure to review this application with the applicant and get their NAMI membership 
-                    expiration. You can input that information, as well as see the other tasks you must complete in this
-                     here: <a href="http://apply.namiwa.org/apply/affiliates/affiliate_to_dos/$applicantId">To do list</a>.
-                    <br>
-                    Thanks!</p>
+                    <p>Dear Team $affiliate,
+                    
+                    There is a new application for $fname $lname who has applied for the $app_type state training.
+
+                    Please make sure you’ve verified their membership either prior to or during the interview. If they are
+                    not a member before the interview, please review with your affiliate leader how to process their
+                    membership so you can do so during the interview.
+
+                    Your affiliate may already have questions, if not please click <a href="https://www.nami.org/Extranet/Education-Training-and-Outreach-Programs/EduHelpDesk/Guides-and-Directories"> here </a> to
+                    review the questions recommended by NAMI.
+
+                    During your interview please verify the following:
+
+                    1) Applicant fully understands the program they are facilitating.
+                    2) Applicant identifies as $mental_condition
+                    3) That they applied to be the facilitator not just attend the program.
+                    4) They are able to attend all training dates and do not plan on missing anything.
+                    5) They will volunteer with your affiliate for two years and what your expectations as an affiliate
+                    are for them.
+
+                    Click <a href="http://apply.namiwa.org/apply/affiliate_review/$applicantId/$linkHashedId">here</a> to review and approve their application.
+
+                    If you have any questions please reach out to me directly
+
+                    [Insert Matt’s Email signature]
+                    </p>
                 </div>
             </body>
         </html>
